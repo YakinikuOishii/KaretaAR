@@ -11,6 +11,7 @@ import UIKit
 class ProfileCarouselView: UICollectionView {
     
     let cellIdentifier = "carousel"
+    let pageCount = 5
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -25,8 +26,14 @@ class ProfileCarouselView: UICollectionView {
     
     convenience init(frame: CGRect) {
         let layout = UICollectionViewFlowLayout()
+        layout.itemSize = CGSize(width: 200, height: frame.height / 2)
+        layout.scrollDirection = .horizontal
         
         self.init(frame: frame, collectionViewLayout: layout)
+        
+        // 垂直方向のスクロールバーを非表示にする
+        self.showsHorizontalScrollIndicator = false
+        self.backgroundColor = UIColor.white
     }
     
     
@@ -54,7 +61,7 @@ extension ProfileCarouselView: UICollectionViewDataSource {
     // セルの設定
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath)
-        
+        cell.contentView.backgroundColor = UIColor.green
         return cell
     }
 }
