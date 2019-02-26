@@ -24,6 +24,17 @@ class ProfileCarouselView: UICollectionView {
         self.register(CarouselCell.self, forCellWithReuseIdentifier: cellIdentifier)
     }
     
+    func transformScale(cell: UICollectionViewCell) {
+        // 計算してスケールを変更する
+        let cellCenter:CGPoint = self.convert(cell.center, to: nil) //セルの中心座標
+        let screenCenterX:CGFloat = UIScreen.main.bounds.width / 2  //画面の中心座標x
+        let reductionRatio:CGFloat = -0.0009                        //縮小率
+        let maxScale:CGFloat = 1                                    //最大値
+        let cellCenterDisX:CGFloat = screenCenterX - cellCenter.x   //中心までの距離
+        let newScale = reductionRatio * cellCenterDisX + maxScale   //新しいスケール
+        cell.transform = CGAffineTransform(scaleX:newScale, y:newScale)
+    }
+    
     convenience init(frame: CGRect) {
         let layout = UICollectionViewFlowLayout()
         layout.itemSize = CGSize(width: 300, height: 200)
@@ -64,4 +75,18 @@ extension ProfileCarouselView: UICollectionViewDataSource {
         cell.contentView.backgroundColor = UIColor.green
         return cell
     }
+}
+
+extension ProfileCarouselView: UIScrollViewDelegate {
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        // 画面内に表示されているセルを取得
+        let cells = self.visibleCells
+        for cell in cells {
+            // ここでセルのScaleを変更する
+            transformScale(cell: cell)
+        }
+        
+    }
+    
 }
