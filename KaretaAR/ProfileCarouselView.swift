@@ -26,13 +26,13 @@ class ProfileCarouselView: UICollectionView {
     
     convenience init(frame: CGRect) {
         let layout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSize(width: 200, height: frame.height / 2)
-        layout.scrollDirection = .horizontal
+        layout.itemSize = CGSize(width: 300, height: 200)
+        layout.scrollDirection = .vertical
         
         self.init(frame: frame, collectionViewLayout: layout)
         
         // 垂直方向のスクロールバーを非表示にする
-        self.showsHorizontalScrollIndicator = false
+        self.showsVerticalScrollIndicator = false
         self.backgroundColor = UIColor.white
     }
     

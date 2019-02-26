@@ -20,12 +20,14 @@ class ProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         let width = self.view.frame.width
         let height = self.view.frame.height
         
-        carouselView = ProfileCarouselView(frame: CGRect(x:0, y:0, width:width, height:height))
+        carouselView = ProfileCarouselView(frame: CGRect(x:0, y:0, width:width, height:609))
         carouselView.center = CGPoint(x:width / 2,y: height / 2)
         self.view.addSubview(carouselView)
+        self.view.sendSubviewToBack(carouselView)
         
         // タブ的なやつ
         tabView.layer.borderColor = borderColor.cgColor
